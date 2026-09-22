@@ -15,21 +15,24 @@ jobs:
         run: |
           curl -sf --retry 3 --retry-delay 5 --retry-all-errors \
             -o /dev/null -w "MistAI: %{http_code}\n" \
-            "https://cynsmxhjchcjcjivnkte.supabase.co/auth/v1/health" \
-            -H "apikey: ${{ secrets.SUPABASE_MISTAI_ANON_KEY }}"
+            "https://cynsmxhjchcjcjivnkte.supabase.co/rest/v1/rate_limits?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_MISTAI_SERVICE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_MISTAI_SERVICE_KEY }}"
 
       - name: Ping Digital Taboo
         continue-on-error: true
         run: |
           curl -sf --retry 3 --retry-delay 5 --retry-all-errors \
             -o /dev/null -w "Digital Taboo: %{http_code}\n" \
-            "https://yiacjatoobjbozopxjvq.supabase.co/auth/v1/health" \
-            -H "apikey: ${{ secrets.SUPABASE_DIGITALTABOO_ANON_KEY }}"
+            "https://yiacjatoobjbozopxjvq.supabase.co/rest/v1/cards?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_DIGITALTABOO_SERVICE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_DIGITALTABOO_SERVICE_KEY }}"
 
       - name: Ping HoopPortal
         continue-on-error: true
         run: |
           curl -sf --retry 3 --retry-delay 5 --retry-all-errors \
             -o /dev/null -w "HoopPortal: %{http_code}\n" \
-            "https://hpuikheuntquldqdewbr.supabase.co/auth/v1/health" \
-            -H "apikey: ${{ secrets.SUPABASE_HOOPPORTAL_ANON_KEY }}"
+            "https://hpuikheuntquldqdewbr.supabase.co/rest/v1/user_profiles?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_HOOPPORTAL_SERVICE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_HOOPPORTAL_SERVICE_KEY }}"
